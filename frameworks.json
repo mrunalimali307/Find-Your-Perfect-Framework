@@ -1,0 +1,249 @@
+[
+  {
+    "id": "react",
+    "name": "React",
+    "type": "Frontend",
+    "icon": "fab fa-react",
+    "color": "#61DAFB",
+    "tagline": "A JavaScript library for building user interfaces",
+    "creator": "Meta (Facebook)",
+    "year": 2013,
+    "language": "JavaScript",
+    "scores": {
+      "performance": 90,
+      "learningCurve": 70,
+      "communitySupport": 95,
+      "jobDemand": 95,
+      "scalability": 88
+    },
+    "bestUseCases": [
+      "Single Page Applications (SPAs)",
+      "Dynamic web interfaces",
+      "Mobile apps with React Native",
+      "Real-time data dashboards",
+      "E-commerce frontends"
+    ],
+    "pros": [
+      "Virtual DOM for fast rendering",
+      "Huge ecosystem (Redux, Next.js)",
+      "Reusable component architecture",
+      "Strong community and job market",
+      "Backed by Meta (Facebook)",
+      "React Native for mobile"
+    ],
+    "cons": [
+      "Only handles the View layer",
+      "Frequent updates can break code",
+      "JSX syntax has a learning curve",
+      "Requires additional libraries for full stack",
+      "Boilerplate can be verbose"
+    ],
+    "tags": ["beginner-friendly", "high-demand", "fast-development", "spa"]
+  },
+  {
+    "id": "angular",
+    "name": "Angular",
+    "type": "Frontend",
+    "icon": "fab fa-angular",
+    "color": "#DD0031",
+    "tagline": "Platform for building mobile and desktop web applications",
+    "creator": "Google",
+    "year": 2016,
+    "language": "TypeScript",
+    "scores": {
+      "performance": 85,
+      "learningCurve": 45,
+      "communitySupport": 85,
+      "jobDemand": 80,
+      "scalability": 95
+    },
+    "bestUseCases": [
+      "Large enterprise applications",
+      "Progressive Web Apps (PWA)",
+      "Complex business dashboards",
+      "Real-time collaborative tools",
+      "Government and banking portals"
+    ],
+    "pros": [
+      "Full framework — batteries included",
+      "TypeScript by default",
+      "Dependency injection built-in",
+      "Excellent for large teams",
+      "Backed by Google",
+      "Strong CLI tooling"
+    ],
+    "cons": [
+      "Steep learning curve",
+      "Verbose and complex boilerplate",
+      "Slower initial load compared to React/Vue",
+      "Overkill for small projects",
+      "Frequent major version changes"
+    ],
+    "tags": ["enterprise", "large-scale", "scalable", "typescript"]
+  },
+  {
+    "id": "vue",
+    "name": "Vue.js",
+    "type": "Frontend",
+    "icon": "fab fa-vuejs",
+    "color": "#42B883",
+    "tagline": "The progressive JavaScript framework",
+    "creator": "Evan You",
+    "year": 2014,
+    "language": "JavaScript",
+    "scores": {
+      "performance": 88,
+      "learningCurve": 88,
+      "communitySupport": 80,
+      "jobDemand": 75,
+      "scalability": 82
+    },
+    "bestUseCases": [
+      "Small to medium web applications",
+      "Interactive UI components",
+      "Prototyping and MVPs",
+      "Integration with existing projects",
+      "Single Page Applications"
+    ],
+    "pros": [
+      "Gentle learning curve",
+      "Excellent documentation",
+      "Flexible and lightweight",
+      "Two-way data binding",
+      "Vue CLI and Vue Router built-in",
+      "Great for beginners"
+    ],
+    "cons": [
+      "Smaller job market than React/Angular",
+      "Fewer enterprise adoptions",
+      "Community smaller than React",
+      "Over-flexibility can lead to inconsistency",
+      "Less corporate backing"
+    ],
+    "tags": ["beginner-friendly", "fast-development", "lightweight", "spa"]
+  },
+  {
+    "id": "django",
+    "name": "Django",
+    "type": "Backend",
+    "icon": "fas fa-server",
+    "color": "#092E20",
+    "colorLight": "#44B78B",
+    "tagline": "The web framework for perfectionists with deadlines",
+    "creator": "Adrian Holovaty & Simon Willison",
+    "year": 2005,
+    "language": "Python",
+    "scores": {
+      "performance": 78,
+      "learningCurve": 72,
+      "communitySupport": 85,
+      "jobDemand": 82,
+      "scalability": 88
+    },
+    "bestUseCases": [
+      "Data-driven web applications",
+      "REST APIs with Django REST Framework",
+      "CMS and content platforms",
+      "Machine Learning integrated apps",
+      "Social networks and marketplaces"
+    ],
+    "pros": [
+      "Batteries-included philosophy",
+      "Built-in admin panel",
+      "Excellent ORM (Object Relational Mapper)",
+      "Strong security features by default",
+      "Great for Python/ML integration",
+      "Rapid development"
+    ],
+    "cons": [
+      "Monolithic architecture",
+      "Not ideal for real-time apps",
+      "Slower than Node.js for I/O tasks",
+      "ORM can be limiting for complex queries",
+      "Python GIL limits concurrency"
+    ],
+    "tags": ["beginner-friendly", "fast-development", "large-scale", "backend"]
+  },
+  {
+    "id": "laravel",
+    "name": "Laravel",
+    "type": "Backend",
+    "icon": "fab fa-laravel",
+    "color": "#FF2D20",
+    "tagline": "The PHP framework for web artisans",
+    "creator": "Taylor Otwell",
+    "year": 2011,
+    "language": "PHP",
+    "scores": {
+      "performance": 75,
+      "learningCurve": 75,
+      "communitySupport": 82,
+      "jobDemand": 78,
+      "scalability": 80
+    },
+    "bestUseCases": [
+      "Full-stack web applications",
+      "REST API backends",
+      "E-commerce platforms",
+      "CRM and ERP systems",
+      "Subscription-based SaaS products"
+    ],
+    "pros": [
+      "Elegant and expressive syntax",
+      "Built-in authentication scaffolding",
+      "Eloquent ORM is developer-friendly",
+      "Strong ecosystem (Forge, Vapor, Nova)",
+      "Great documentation",
+      "Blade templating engine"
+    ],
+    "cons": [
+      "Lower performance vs Node.js",
+      "PHP has declining popularity trend",
+      "Shared hosting dependency",
+      "Can be memory-intensive",
+      "Fewer jobs in modern tech stacks"
+    ],
+    "tags": ["beginner-friendly", "fast-development", "full-stack", "backend"]
+  },
+  {
+    "id": "express",
+    "name": "Express.js",
+    "type": "Backend",
+    "icon": "fab fa-node-js",
+    "color": "#68A063",
+    "tagline": "Fast, unopinionated, minimalist web framework for Node.js",
+    "creator": "TJ Holowaychuk",
+    "year": 2010,
+    "language": "JavaScript",
+    "scores": {
+      "performance": 92,
+      "learningCurve": 80,
+      "communitySupport": 90,
+      "jobDemand": 88,
+      "scalability": 85
+    },
+    "bestUseCases": [
+      "RESTful API development",
+      "Real-time applications (with Socket.io)",
+      "Microservices architecture",
+      "Serverless functions",
+      "MERN/MEAN stack backends"
+    ],
+    "pros": [
+      "Extremely fast and lightweight",
+      "Same language as frontend (JS)",
+      "Huge npm ecosystem",
+      "Non-blocking I/O for high concurrency",
+      "Flexible and minimalist",
+      "Great for real-time apps"
+    ],
+    "cons": [
+      "Unopinionated — requires many decisions",
+      "No built-in security features",
+      "Callback hell (mitigated with async/await)",
+      "No built-in ORM or database tools",
+      "Requires more architectural planning"
+    ],
+    "tags": ["fast-development", "high-performance", "large-scale", "backend", "real-time"]
+  }
+]

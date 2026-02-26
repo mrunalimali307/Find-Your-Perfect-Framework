@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FrameWork Forge — Web Development Framework Comparison System</title>
+  <meta name="description"
+    content="Compare web development frameworks like React, Angular, Vue, Django, Laravel, and Express.js with visual charts and smart recommendations." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body data-theme="dark">
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar"
+    class="navbar fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 flex items-center justify-between transition-all duration-300">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div
+        class="logo-icon w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-white text-lg md:text-xl font-bold">
+        <i class="fas fa-code-branch"></i>
+      </div>
+      <span class="font-display font-bold text-lg md:text-xl logo-text">FrameWork <span
+          class="text-accent">Forge</span></span>
+    </div>
+
+    <!-- Desktop right-side controls (hidden on mobile) -->
+    <div class="hidden md:flex items-center gap-4">
+      <button id="themeToggle"
+        class="theme-toggle-btn w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
+        title="Toggle Dark/Light Mode">
+        <i class="fas fa-moon text-lg" id="themeIcon"></i>
+      </button>
+      <a href="#compare"
+        class="nav-cta-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200">
+        <i class="fas fa-balance-scale"></i> Compare Now
+      </a>
+    </div>
+
+    <!-- Mobile controls (theme button + hamburger) -->
+    <div class="flex md:hidden items-center gap-2">
+      <button id="themeToggleMobile"
+        class="theme-toggle-btn w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+        title="Toggle Theme">
+        <i class="fas fa-moon text-base" id="themeIconMobile"></i>
+      </button>
+      <!-- Hamburger button -->
+      <button id="hamburger"
+        class="hamburger-btn w-9 h-9 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-200"
+        aria-label="Open menu" aria-expanded="false">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop fixed inset-0 z-40 hidden" aria-hidden="true"></div>
+  <nav id="mobileNav"
+    class="mobile-nav fixed top-0 right-0 h-full w-72 z-50 flex flex-col p-6 pt-20 transform translate-x-full transition-transform duration-300">
+    <!-- Close button -->
+    <button id="mobileNavClose"
+      class="absolute top-4 right-4 w-9 h-9 rounded-xl flex items-center justify-center theme-toggle-btn"
+      aria-label="Close menu">
+      <i class="fas fa-times text-lg"></i>
+    </button>
+
+    <!-- Nav links -->
+    <div class="flex flex-col gap-2 mt-2">
+      <a href="#hero" class="mobile-nav-link" id="mnl-hero"> <i class="fas fa-home w-5"></i> Home</a>
+      <a href="#compare" class="mobile-nav-link" id="mnl-compare"> <i class="fas fa-layer-group w-5"></i> Select
+        Frameworks</a>
+      <a href="#dashboard" class="mobile-nav-link" id="mnl-dashboard"> <i class="fas fa-chart-bar w-5"></i>
+        Dashboard</a>
+      <a href="#recommend" class="mobile-nav-link" id="mnl-recommend"> <i class="fas fa-brain w-5"></i>
+        Recommendation</a>
+    </div>
+
+    <!-- CTA inside drawer -->
+    <div class="mt-auto">
+      <a href="#compare"
+        class="nav-cta-btn flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-200 w-full mobile-nav-link">
+        <i class="fas fa-rocket"></i> Start Comparing
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero" class="hero-section min-h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- Animated Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <!-- Grid Overlay -->
+    <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+
+    <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+      <!-- Badge -->
+      <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        College Exhibition Project 2025
+      </div>
+      <!-- Heading -->
+      <h1 class="font-display font-bold text-5xl md:text-7xl leading-tight mb-6">
+        Find Your
+        <span class="hero-gradient-text block">Perfect Framework</span>
+      </h1>
+      <!-- Description -->
+      <p class="hero-desc text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        Compare React, Angular, Vue, Django, Laravel & Express.js with visual charts,
+        performance scores, and smart AI-powered recommendations tailored for you.
+      </p>
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#compare"
+          class="btn-primary flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300">
+          <i class="fas fa-rocket"></i> Start Comparing
+        </a>
+        <a href="#recommend"
+          class="btn-secondary flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300">
+          <i class="fas fa-magic"></i> Get Recommendation
+        </a>
+      </div>
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator mt-16 flex flex-col items-center gap-2 opacity-60">
+        <span class="text-sm">Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS STRIP ===== -->
+  <section class="stats-strip py-8 px-6">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="stat-card text-center">
+        <div class="stat-number font-display font-bold text-3xl">6</div>
+        <div class="stat-label text-sm mt-1">Frameworks</div>
+      </div>
+      <div class="stat-card text-center">
+        <div class="stat-number font-display font-bold text-3xl">5</div>
+        <div class="stat-label text-sm mt-1">Metrics Tracked</div>
+      </div>
+      <div class="stat-card text-center">
+        <div class="stat-number font-display font-bold text-3xl">∞</div>
+        <div class="stat-label text-sm mt-1">Combinations</div>
+      </div>
+      <div class="stat-card text-center">
+        <div class="stat-number font-display font-bold text-3xl">₹0</div>
+        <div class="stat-label text-sm mt-1">Cost — 100% Free</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FRAMEWORK SELECTION SECTION ===== -->
+  <section id="compare" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="section-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+          <i class="fas fa-layer-group"></i> STEP 1
+        </div>
+        <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Select Frameworks</h2>
+        <p class="section-desc text-lg max-w-xl mx-auto">Choose 2 or more frameworks to compare them side by side.</p>
+      </div>
+
+      <!-- Selection Counter -->
+      <div class="selection-counter flex items-center justify-center gap-4 mb-8">
+        <div class="counter-badge flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold">
+          <i class="fas fa-check-circle text-green-400"></i>
+          <span><span id="selectedCount">0</span> selected</span>
+        </div>
+        <button id="clearSelection"
+          class="clear-btn px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hidden">
+          <i class="fas fa-times mr-1"></i> Clear All
+        </button>
+      </div>
+
+      <!-- Framework Cards Grid -->
+      <div id="frameworkGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <!-- Compare Button -->
+      <div class="text-center">
+        <button id="compareBtn"
+          class="compare-btn flex items-center gap-3 mx-auto px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+          disabled>
+          <i class="fas fa-balance-scale"></i>
+          Compare Selected Frameworks
+          <span id="compareCount" class="badge-bubble text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+        </button>
+        <p class="helper-text text-sm mt-3 opacity-60">Select at least 2 frameworks to enable comparison</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPARISON DASHBOARD ===== -->
+  <section id="dashboard" class="py-20 px-6 hidden">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="section-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+          <i class="fas fa-chart-bar"></i> STEP 2
+        </div>
+        <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Comparison Dashboard</h2>
+        <p class="section-desc text-lg max-w-xl mx-auto">Visual side-by-side comparison with scores and metrics.</p>
+      </div>
+
+      <!-- Score Cards Row -->
+      <div id="scoreCardsRow" class="grid gap-6 mb-12">
+        <!-- Score cards injected by JS -->
+      </div>
+
+      <!-- Progress Bars Section -->
+      <div class="dashboard-card rounded-3xl p-8 mb-8">
+        <h3 class="font-display font-bold text-2xl mb-6 flex items-center gap-3">
+          <i class="fas fa-bars-progress text-accent"></i>
+          Performance Metrics
+        </h3>
+        <div id="progressBarsContainer">
+          <!-- Progress bars injected by JS -->
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <!-- Radar Chart -->
+        <div class="dashboard-card rounded-3xl p-8">
+          <h3 class="font-display font-bold text-xl mb-6 flex items-center gap-3">
+            <i class="fas fa-spider text-accent"></i> Radar Overview
+          </h3>
+          <div class="chart-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+        <!-- Bar Chart -->
+        <div class="dashboard-card rounded-3xl p-8">
+          <h3 class="font-display font-bold text-xl mb-6 flex items-center gap-3">
+            <i class="fas fa-chart-bar text-accent"></i> Score Breakdown
+          </h3>
+          <div class="chart-wrapper">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="dashboard-card rounded-3xl p-8 mb-8 overflow-x-auto">
+        <h3 class="font-display font-bold text-2xl mb-6 flex items-center gap-3">
+          <i class="fas fa-table text-accent"></i>
+          Feature Comparison Table
+        </h3>
+        <table id="comparisonTable" class="comparison-table w-full text-sm">
+          <!-- Table generated by JS -->
+        </table>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <button id="scrollToRecommend"
+          class="btn-primary flex items-center gap-2 px-8 py-3.5 rounded-2xl font-bold transition-all duration-300">
+          <i class="fas fa-magic"></i> Get Smart Recommendation
+        </button>
+        <button id="backToSelect"
+          class="btn-secondary flex items-center gap-2 px-8 py-3.5 rounded-2xl font-bold transition-all duration-300">
+          <i class="fas fa-arrow-left"></i> Change Selection
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SMART RECOMMENDATION SECTION ===== -->
+  <section id="recommend" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="section-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+          <i class="fas fa-brain"></i> SMART AI
+        </div>
+        <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Smart Recommendation</h2>
+        <p class="section-desc text-lg max-w-xl mx-auto">Answer 4 quick questions — we'll instantly find your perfect
+          framework match.</p>
+      </div>
+
+      <!-- Recommendation Form Card -->
+      <div class="recommend-card rounded-3xl p-8 md:p-10">
+
+        <!-- Progress bar (JS updates --answers attr) -->
+        <div class="rec-progress-wrap mb-8">
+          <div class="rec-progress-header">
+            <span class="rec-progress-label">Questions answered</span>
+            <span class="rec-progress-count"><span id="answeredCount">0</span> / 4</span>
+          </div>
+          <div class="rec-progress-track">
+            <div class="rec-progress-fill" id="answeredFill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Step 1 — Experience Level -->
+        <div class="rec-step">
+          <div class="rec-step-header">
+            <div class="rec-step-num">01</div>
+            <div>
+              <div class="rec-step-title"><i class="fas fa-graduation-cap"></i> Your Experience Level</div>
+              <div class="rec-step-sub">How comfortable are you with frameworks?</div>
+            </div>
+          </div>
+          <div class="rec-options-row">
+            <label class="radio-option rec-option" data-name="experience">
+              <input type="radio" name="experience" value="beginner" class="hidden" />
+              <span class="rec-option-emoji">🌱</span>
+              <span class="rec-option-text">Beginner</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="experience">
+              <input type="radio" name="experience" value="intermediate" class="hidden" />
+              <span class="rec-option-emoji">🚀</span>
+              <span class="rec-option-text">Intermediate</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="experience">
+              <input type="radio" name="experience" value="advanced" class="hidden" />
+              <span class="rec-option-emoji">⚡</span>
+              <span class="rec-option-text">Advanced</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="rec-divider"></div>
+
+        <!-- Step 2 — Project Scale -->
+        <div class="rec-step">
+          <div class="rec-step-header">
+            <div class="rec-step-num">02</div>
+            <div>
+              <div class="rec-step-title"><i class="fas fa-expand-arrows-alt"></i> Project Scale</div>
+              <div class="rec-step-sub">How big is the app you're building?</div>
+            </div>
+          </div>
+          <div class="rec-options-row">
+            <label class="radio-option rec-option" data-name="scale">
+              <input type="radio" name="scale" value="small" class="hidden" />
+              <span class="rec-option-emoji">📦</span>
+              <span class="rec-option-text">Small / Personal</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="scale">
+              <input type="radio" name="scale" value="medium" class="hidden" />
+              <span class="rec-option-emoji">🏢</span>
+              <span class="rec-option-text">Medium / Startup</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="scale">
+              <input type="radio" name="scale" value="large" class="hidden" />
+              <span class="rec-option-emoji">🏗️</span>
+              <span class="rec-option-text">Large / Enterprise</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="rec-divider"></div>
+
+        <!-- Step 3 — Priority -->
+        <div class="rec-step">
+          <div class="rec-step-header">
+            <div class="rec-step-num">03</div>
+            <div>
+              <div class="rec-step-title"><i class="fas fa-star"></i> Your Priority</div>
+              <div class="rec-step-sub">What matters most in your choice?</div>
+            </div>
+          </div>
+          <div class="rec-options-row">
+            <label class="radio-option rec-option" data-name="priority">
+              <input type="radio" name="priority" value="speed" class="hidden" />
+              <span class="rec-option-emoji">⚡</span>
+              <span class="rec-option-text">Fast Dev</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="priority">
+              <input type="radio" name="priority" value="performance" class="hidden" />
+              <span class="rec-option-emoji">🏎️</span>
+              <span class="rec-option-text">Performance</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="priority">
+              <input type="radio" name="priority" value="jobs" class="hidden" />
+              <span class="rec-option-emoji">💼</span>
+              <span class="rec-option-text">Job Market</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="rec-divider"></div>
+
+        <!-- Step 4 — Project Type -->
+        <div class="rec-step">
+          <div class="rec-step-header">
+            <div class="rec-step-num">04</div>
+            <div>
+              <div class="rec-step-title"><i class="fas fa-project-diagram"></i> Project Type</div>
+              <div class="rec-step-sub">What part of the stack are you building?</div>
+            </div>
+          </div>
+          <div class="rec-options-row">
+            <label class="radio-option rec-option" data-name="type">
+              <input type="radio" name="type" value="frontend" class="hidden" />
+              <span class="rec-option-emoji">🎨</span>
+              <span class="rec-option-text">Frontend / UI</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="type">
+              <input type="radio" name="type" value="backend" class="hidden" />
+              <span class="rec-option-emoji">🔧</span>
+              <span class="rec-option-text">Backend / API</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+            <label class="radio-option rec-option" data-name="type">
+              <input type="radio" name="type" value="fullstack" class="hidden" />
+              <span class="rec-option-emoji">🌐</span>
+              <span class="rec-option-text">Full Stack</span>
+              <i class="fas fa-check rec-check-icon"></i>
+            </label>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="text-center mt-8">
+          <button id="generateRecommendation"
+            class="rec-generate-btn btn-primary flex items-center gap-3 mx-auto px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300">
+            <i class="fas fa-wand-magic-sparkles"></i>
+            Generate My Recommendation
+          </button>
+          <p class="rec-hint-text mt-3 text-sm opacity-50">Answer all 4 questions to get the best result</p>
+        </div>
+      </div>
+
+      <!-- Recommendation Result -->
+      <div id="recommendResult" class="mt-8 hidden">
+        <!-- Result injected by JS -->
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer py-12 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="logo-icon w-10 h-10 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+          <i class="fas fa-code-branch"></i>
+        </div>
+        <span class="font-display font-bold text-xl">FrameWork <span class="text-accent">Forge</span></span>
+      </div>
+      <p class="footer-desc text-sm mb-6 opacity-60">Built with ❤️ for college exhibition. 100% free, no backend,
+        open-source ready.</p>
+      <div class="flex items-center justify-center gap-6 text-sm opacity-50">
+        <span><i class="fas fa-code mr-1"></i> HTML + CSS + JS</span>
+        <span><i class="fas fa-chart-pie mr-1"></i> Chart.js</span>
+        <span><i class="fas fa-wind mr-1"></i> Tailwind CSS</span>
+        <span><i class="fab fa-github mr-1"></i> GitHub Pages Ready</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== FRAMEWORK DETAIL MODAL ===== -->
+  <div id="detailModal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 hidden">
+    <div class="modal-backdrop absolute inset-0" id="modalBackdrop"></div>
+    <div class="modal-content relative w-full max-w-2xl rounded-3xl p-8 overflow-y-auto max-h-[90vh]">
+      <button id="closeModal"
+        class="modal-close absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+      <div id="modalBody">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div id="toast"
+    class="toast fixed bottom-6 right-6 z-[200] px-5 py-3.5 rounded-2xl font-semibold text-sm flex items-center gap-2 hidden">
+    <i class="fas fa-info-circle" id="toastIcon"></i>
+    <span id="toastMessage">Hello!</span>
+  </div>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+
+</html>
